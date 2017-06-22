@@ -20,6 +20,10 @@ p {
     color: #557bd4;
 }
 
+.navbar-default .navbar-brand {
+    color: #557bd4;
+    font-weight: bold;
+}
 
 /*.container {
 	width: 100%;
@@ -55,15 +59,20 @@ p {
 
 .top_left_location {
     display: inline-block;
-    font-size: 14px;
     cursor: pointer;
+}
+
+.top_left_location_p {
+    font-size: 14px;
+    line-height: 32px;
 }
 
 .top_right {
     display: inline-block;
+    float: right;
 }
 
 .top_right_a {
     font-size: 14px;
-    float: right;
+    line-height: 40px;
 }
