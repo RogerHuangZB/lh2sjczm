@@ -16,8 +16,8 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./static/js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="./static/styles/index.css">
+    <script type="text/javascript" src="./static/js/index.js"></script>
 </head>
 
 <body>
@@ -58,8 +58,8 @@
                     <button type="submit" class="btn btn-default">查询</button>
                 </form> -->
                 <ul class="nav navbar-nav navbar-right">
-                    <button type="button" class="btn btn-primary navbar-btn">登录</button>
-                    <button type="button" class="btn btn-default navbar-btn">注册</button>
+                    <button type="button" class="btn btn-primary navbar-btn" id="toSignInBtn">登录</button>
+                    <button type="button" class="btn btn-default navbar-btn" id="toRegisterBtn">注册</button>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -68,32 +68,16 @@
     </nav>
 
     <div class="container">
-        <div class="loginDiv">
-            <form>
-                <div class="form-group">
-                    <label for="userName">用户名</label>
-                    <input type="text" class="form-control" id="userName" placeholder="邮箱\手机号">
-                </div>
-                <div class="form-group">
-                    <label for="password">密码</label>
-                    <input type="password" class="form-control" id="password" placeholder="密码">
-                    <p class="help-block">不少于6位，必须包含字母（区分大小写）、数字、特殊符号中的两种</p>
-                </div>
-                <!--<div class="form-group">-->
-                <!--<label for="exampleInputFile">提交图片</label>-->
-                <!--<input type="file" id="exampleInputFile">-->
-                <!--<p class="help-block">上传图片测试用</p>-->
-                <!--</div>-->
-                <!--<div class="checkbox">-->
-                <!--<label>-->
-                <!--<input type="checkbox"> 记住我-->
-                <!--</label>-->
-                <!--</div>-->
-                <button type="button" class="btn btn-default" id="loginBtn">登录</button>
-            </form>
+        <div class="searchDiv">
+            <input type="text" class="form-control" id="searchInput" placeholder="冲床、磨床、数控机床">
+            <button type="button" class="btn btn-primary">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                搜索
+            </button>
         </div>
 
     </div>
 </body>
 
 </html>
+<script type="text/javascript" src="static/js/index.js"></script>

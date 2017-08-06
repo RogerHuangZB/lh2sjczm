@@ -3,8 +3,6 @@ body {
     width: 100%;
     height: 100%;
     margin: 0;
-    font-family: "Microsoft YaHei";
-    font-size: 12px;
     color: #333;
 }
 
@@ -20,6 +18,7 @@ p {
 .navbar {
     position: absolute;
     width: 100%;
+    margin:0;
 }
 
 .navbar-default .navbar-brand {
@@ -28,12 +27,59 @@ p {
 }
 
 .container {
-	/*width: 100%;*/
-	/*height: 100%;*/
-	/*background-color: #f5f5f5;*/
+    padding-top: 50px;
+    /*display: -webkit-box;*/
+    /*display: -ms-flexbox;*/
+    /*display: flex;*/
+    /*-webkit-box-align: start;*/
+    /*-ms-flex-align: start;*/
+    /*align-items: flex-start;*/
+    /*position: relative;*/
+    /*width: 1000px;*/
+    /*padding: 50px 16px;*/
+    /*margin: 10px auto;*/
+
 }
 
 .loginDiv {
-    float: left;
-    margin-top: 18vw;
+    margin-top: 20vmin;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    position: relative;
+}
+
+.searchDiv {
+    padding-top: 15vh;
+}
+
+.searchDiv input {
+    display: inline-block;
+    height: 45px;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.searchDiv button {
+    display: inline-block;
+    height: 40px;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.searchDiv input {
+    width: 50vw;
+    font-family: Microsoft YaHei;
+    margin-left: 5vw;
+}
+
+.searchDiv button {
+    letter-spacing: 2px;
+    width: 10vw;
+    min-width: 85px;
+    margin-left: 5vw;
+}
+
+.searchDiv button span {
+    vertical-align: text-top;
 }
