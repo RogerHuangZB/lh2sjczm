@@ -34,9 +34,10 @@ function register(u, p) {
         url: sessionStorage.getItem("apiUrl") + '/user/register',
         dataType: "json",
         async: false,
-        headers:{
-            authorization:"token"+sessionStorage.getItem("token")
-        },
+        //TODO: 注册怎么可能带token
+        // headers:{
+        //     authorization:"token"+sessionStorage.getItem("token")
+        // },
         data: {
             loginName:u ,
             password: p
