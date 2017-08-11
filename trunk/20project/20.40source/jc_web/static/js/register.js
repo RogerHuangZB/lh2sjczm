@@ -1,11 +1,4 @@
 $(function() {
-    $('#userName').blur(function () {
-        var userName = $('#userName').val();
-        if (userName !== ""){
-            isUserNameExist(userName);
-        }
-    });
-    
     $('#registerBtn').click(function () {
         var userName = $('#userName').val();
         var password = $('#password').val();
@@ -13,11 +6,6 @@ $(function() {
         if (userName === ""){
             alert("请输入用户名！");
             return;
-        }
-        if(isUserNameExist(userName)){
-            alert("用户名已存在!");
-        }else{
-            console.log("用户名可以使用！");
         }
         if (password === ""){
             alert("请输入密码！");
@@ -39,27 +27,27 @@ $(function() {
     });
 });
 
-function register(u, p) {
-    alert("注册成功！");
-    window.location = "../index.html";
-}
 
-function isUserNameExist(u) {
+function register(u, p) {
     $.ajax({
         type: 'POST',
-        url: 'http://192.168.0.102:9090/user/isUserExist',
+        url: sessionStorage.getItem("apiUrl") + '/user/register',
         dataType: "json",
         async: false,
         headers:{
-            authorization:"tokend652c36290024c0f8ee99568c8c1daf0"
+            authorization:"token"+sessionStorage.getItem("token")
         },
-        data: {loginName:u},
+        data: {
+            loginName:u ,
+            password: p
+        },
         success: function (data) {
             console.log(data);
-            if(data.code !== 'ok'){
-                alert("用户名已存在!");
+            if(data.code === 'ok'){
+                alert("注册成功！");
+                signIn(u, p);
             }else{
-                console.log("用户名可以使用！");
+                console.log("注册失败！");
             }
         },
         error:  function(XMLHttpRequest, textStatus, errorThrown){

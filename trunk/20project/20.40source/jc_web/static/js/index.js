@@ -1,3 +1,4 @@
+
 $(function() {
     $('#toSignInBtn').click(function () {
         window.location = "../../views/sign_in.html";

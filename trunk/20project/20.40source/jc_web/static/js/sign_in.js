@@ -17,24 +17,28 @@ $(function() {
             alert("密码长度不对！");
             return;
         }
-        login(userName, password);
+        signIn(userName, password);
     });
 });
 
-function login(u,p) {
+function signIn(u,p) {
     var data = {
         "username": u,
         "password": p
     };
     $.ajax({
         type: 'POST',
-        url: 'http://192.168.0.102:9090/login',
+        url: sessionStorage.getItem("apiUrl") + '/login',
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(data),
         success: function (data) {
-            console.log(data);
-            window.location = "../index.html";
+            console.log(data.msg);
+            if(data.code==='ok'){
+                sessionStorage.setItem("loginName",data.data.user.loginName);
+                sessionStorage.setItem("token",data.data.token);
+                window.location = "../index.html";
+            }
         },
         error:  function(XMLHttpRequest, textStatus, errorThrown){
             //通常情况下textStatus和errorThrown只有其中一个包含信息
