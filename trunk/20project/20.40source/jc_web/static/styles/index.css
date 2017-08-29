@@ -24,6 +24,7 @@ p {
 .navbar-default .navbar-brand {
     color: #557bd4;
     font-weight: bold;
+    /*display: none;*/
 }
 
 .container {

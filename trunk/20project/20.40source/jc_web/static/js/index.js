@@ -1,9 +1,9 @@
 
 $(function() {
     $('#toSignInBtn').click(function () {
-        window.location = "../../views/sign_in.html";
+        window.location = "views/sign_in.html";
     });
     $('#toRegisterBtn').click(function () {
-        window.location = "../../views/register.html";
+        window.location = "views/register.html";
     });
 });

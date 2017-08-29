@@ -1,11 +1,10 @@
 //-------------------------------------------------------开发模式  fis3 release -wL
-// fis.match('*', {
-//     deploy: fis.plugin('local-deliver', {
-//         // to: 'D:/devSoftware/apache-tomcat-7.0.42/webapps'
-//         to: 'E:/Program Files/Apache Software Foundation/Tomcat 7.0/webapps'
-//     }),
-//     release: '/jc_web/$0'
-// });
+fis.match('*', {
+    deploy: fis.plugin('local-deliver', {
+        to: 'E:/devTools/apache-tomcat-7.0.42/webapps'
+    }),
+    release: '/jc_web/$0'
+});
 
 fis.match('*.{js,css,png}', {
     useHash: false,
