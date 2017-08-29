@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cares.baseframe.mapper.JcTypeMapper">
+    <resultMap id="BaseResultMap" type="com.cares.baseframe.model.JcType">
+        <id column="tid" property="typeId" />
+        <result column="tname" property="typeName" />
+        <result column="tpid" property="typePid" />
+        <result column="remark" property="remark" />
+        <result column="sort_no" property="sortNo" />
+        <result column="validity" property="validity" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tid, tname, tpid, remark, sort_no, validity
+    </sql>
+
+
+<!--增-->
+    <insert id="insert" parameterType="com.cares.baseframe.model.JcType">
+        <selectKey resultType="java.lang.Long" keyProperty="typeId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS typeId
+        </selectKey>
+        insert into b_jc_type (tid, tname, tpid, remark, sort_no, validity)
+        values
+        (#{typeId},#{typeName}, #{typePid}, #{remark}, #{sortNo}, #{validity})
+    </insert>
+
+<!--删-->
+    <update id="deleteJcTypeById" parameterType="java.lang.Long">
+        update
+        b_jc_type
+        <set>
+                validity= 1,
+        </set>
+        where tid= #{typeId}
+    </update>
+
+<!--改-->
+    <update id="updateJcType" parameterType="com.cares.baseframe.model.JcType">
+        update
+        b_jc_type
+        <set>
+            <if test="typeName != null">
+                tname= #{typeName},
+            </if>
+            <if test="typePid != null">
+                tpid= #{typePid},
+            </if>
+            <if test="remark != null">
+                remark= #{remark},
+            </if>
+            <if test="sortNo != null">
+                sort_no= #{sortNo},
+            </if>
+            <if test="validity != null">
+                validity= #{validity},
+            </if>
+        </set>
+        where tid= #{typeId}
+    </update>
+
+<!--查-->
+    <select id="findJcTypeById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_type
+        where tid = #{typeId}
+    </select>
+
+<!--分页查询-->
+    <select id="findJcTypePageCondition" resultMap="BaseResultMap" parameterType="com.cares.baseframe.bean.PageInfo">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_type
+        order by ${sort} ${order}
+        limit #{from}, #{size}
+    </select>
+
+    <select id="findJcTypePageCount" resultType="java.lang.Integer" parameterType="com.cares.baseframe.bean.PageInfo">
+        select
+        count(*) count
+        from
+        b_jc_type
+    </select>
+
+</mapper>

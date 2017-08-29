@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cares.baseframe.mapper.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.cares.baseframe.bean.RoleBean">
+		<id column="role_id" property="roleId" />
+		<result column="role_name" property="roleName" />
+		<result column="seq_sort" property="seqSort" />
+		<result column="remark" property="remark" />
+		<result column="status" property="status" />
+		<result column="create_time" property="createTime" />
+		<result column="dept_id" property="deptId" />
+		<result column="creator" property="creator" />
+		<result column="modifier" property="modifier" />
+		<result column="create_time" property="createTime" />
+		<result column="modify_time" property="modifyTime" />
+		<result column="validity" property="validity" />
+		<result column="unique_code" property="uniqueCode" />
+		<association property="resources" column ="role_id" select = "com.cares.baseframe.mapper.ResourceMapper.findResourceByRoleId"></association>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		s.role_id, s.role_name, s.seq_sort, s.remark,s.create_time, s.dept_id, s.unique_code
+	</sql>
+	<select id="findRolePageCondition" resultMap="BaseResultMap"
+		parameterType="com.cares.baseframe.bean.PageInfo">
+		select
+		<include refid="Base_Column_List" />
+		from s_role s left join s_dept t on s.dept_id = t.dept_id
+		where 1=1
+		<if test="condition.deptId != null and condition.deptId != ''">
+			and s.dept_id = #{condition.deptId}
+		</if>
+		<if test="condition.pid != null and condition.pid != ''">
+			and (t.dept_pid = #{condition.pid} or t.dept_id = #{condition.pid})
+		</if>
+		order by ${sort} ${order}
+		limit #{from}, #{size}
+	</select>
+
+	<select id="findRolePageCount" resultType="java.lang.Integer"
+		parameterType="com.cares.baseframe.bean.PageInfo">
+		select
+		count(*) count
+		from s_role s left join s_dept t on s.dept_id = t.dept_id
+		where 1=1
+		<if test="condition.deptId != null and condition.deptId != ''">
+			and s.dept_id = #{condition.deptId}
+		</if>
+		<if test="condition.pid != null and condition.pid != ''">
+			and (t.dept_pid = #{condition.pid} or t.dept_id = #{condition.pid})
+		</if>
+	</select>
+	<select id="findRoleById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from s_role s
+		where s.role_id = #{role_id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="findRoleAllByDeptId" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from s_role s left join s_dept t on s.dept_id = t.dept_id
+		where 1=1
+		<if test="deptId != null and deptId != ''">
+			and s.dept_id = #{deptId}
+		</if>
+		<if test="pid != null and pid != ''">
+			and (t.dept_pid = #{pid} or t.dept_id = #{pid})
+		</if>
+		order by s.seq_sort
+	</select>
+	
+	<select id="findResourceIdListByRoleId" resultType="java.lang.Long"
+		parameterType="java.lang.Long">
+		SELECT
+		e.resource_id AS id
+		FROM
+		s_role r
+		LEFT JOIN s_role_resource e ON r.role_id = e.role_id
+		WHERE
+		r.role_id = #{id}
+	</select>
+
+	<select id="queryUserRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select a.role_id ,a.role_name from
+		s_role a left join s_user_role b on a.role_id = b.role_id where user_id =#{id}
+	</select>
+	
+	<select id="findResourceIdListByRoleIdAndType" resultType="com.cares.baseframe.model.Resource"
+		parameterType="java.lang.Long">
+		select distinct r.res_id resId,r.`res_name` resName,r.res_icon resIcon,r.res_pid resPid,r.res_url resUrl,r.res_type resType
+		,r.seq_sort seqSort,r.remark remark,r.create_time createTime from s_resource r
+		left join s_role_resource s on r.res_id= s.resource_id
+		left join s_role t on t.role_id= s.role_id
+		where t.role_id = #{id} AND r.res_type = 0 order by r.res_pid,r.seq_sort
+
+	</select>
+
+	<select id="findRoleResourceIdListByRoleId" resultType="java.lang.Long"
+		parameterType="java.lang.Long">
+
+		SELECT
+		e.id AS id
+		FROM
+		s_role r
+		LEFT JOIN s_role_resource e ON r.role_id = e.role_id
+		WHERE
+		r.role_id = #{id}
+	</select>
+
+	<select id="findRoleResourceListByRoleId" resultType="java.util.HashMap"
+		parameterType="java.lang.Long">
+		SELECT
+		e.id AS id,
+		s.res_url AS url
+		FROM
+		s_role r
+		LEFT JOIN s_role_resource e ON r.role_id = e.role_id
+		LEFT JOIN s_resource s ON e.resource_id = s.res_id
+		WHERE
+		r.role_id =#{id}
+	</select>
+	<insert id="insert" parameterType="com.cares.baseframe.model.Role">
+		<selectKey resultType="java.lang.Long" keyProperty="roleId"
+			order="AFTER">
+			SELECT LAST_INSERT_ID() as roleId
+		</selectKey>
+		insert into s_role (role_name, seq_sort,
+		remark,validity,create_time,dept_id,creator,modifier,modify_time,unique_code)
+		values (#{roleName}, #{seqSort}, #{remark},#{validity},now(),#{deptId},#{creator},#{modifier},now(),#{uniqueCode})
+	</insert>
+
+	<update id="updateRole" parameterType="com.cares.baseframe.model.Role">
+		update s_role set role_name=#{roleName},seq_sort =
+		#{seqSort},remark=#{remark}
+		<if test="validity != null and validity != ''">
+			,validity=#{validity}
+		</if>
+		,create_time=now(),
+		creator=#{creator},modifier=#{modifier},modify_time=now()
+		where role_id= #{roleId}
+	</update>
+
+
+	<delete id="deleteRoleById" parameterType="java.lang.Long">
+		delete from s_role
+		where role_id = #{id,jdbcType=BIGINT}
+	</delete>
+</mapper>

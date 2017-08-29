@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cares.baseframe.mapper.DeptAgentMapper">
+  <resultMap id="BaseResultMap" type="com.cares.baseframe.model.DeptAgent">
+    <id column="dept_agent_id" jdbcType="BIGINT" property="deptAgentId" />
+    <result column="dept_id" jdbcType="BIGINT" property="deptId" />
+    <result column="airport_id" jdbcType="BIGINT" property="airportId" />
+    <result column="carrier" jdbcType="VARCHAR" property="carrier" />
+  </resultMap>
+  
+  <resultMap id="DeptAgentVo" type="com.cares.baseframe.bean.DeptAgentVo">
+    <id column="deptAgentId" jdbcType="BIGINT" property="deptAgentId" />
+    <result column="deptId" jdbcType="BIGINT" property="deptId" />
+    <result column="airportId" jdbcType="BIGINT" property="airportId" />
+    <result column="airportName" jdbcType="VARCHAR" property="airportName" />
+    <result column="aptCd" jdbcType="VARCHAR" property="aptCd" />
+    <result column="aptCdInitial" jdbcType="VARCHAR" property="aptCdInitial" />
+    <result column="carrier" jdbcType="VARCHAR" property="carrier" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    dept_agent_id , dept_id , airport_id , carrier
+  </sql>
+  
+  <sql id="queryWhereEquals">
+  	<if test="condition.deptAgentId != null">
+       and dept_agent_id=#{condition.deptAgentId,jdbcType=BIGINT}
+      </if>
+      <if test="condition.deptId != null">
+       and dept_id=#{condition.deptId,jdbcType=BIGINT}
+      </if>
+      <if test="condition.airportId != null">
+        and airport_id=#{condition.airportId,jdbcType=BIGINT}
+      </if>
+      <if test="condition.carrier != null">
+        and carrier=#{condition.carrier,jdbcType=VARCHAR}
+      </if>
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_dept_agent
+    where dept_agent_id = #{deptAgentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from s_dept_agent
+    where dept_agent_id = #{deptAgentId,jdbcType=BIGINT}
+  </delete>
+  
+   <delete id="deleteByDeptId" parameterType="java.lang.Long">
+    delete from s_dept_agent
+    where dept_id = #{deptId,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cares.baseframe.model.DeptAgent">
+    insert into s_dept_agent (dept_agent_id, dept_id, airport_id, 
+      carrier,validity)
+    values (#{deptAgentId,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT}, #{airportId,jdbcType=BIGINT}, 
+      #{carrier,jdbcType=VARCHAR},1)
+  </insert>
+  <insert id="insertSelective" parameterType="com.cares.baseframe.model.DeptAgent">
+    insert into s_dept_agent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptAgentId != null">
+        dept_agent_id,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+      <if test="airportId != null">
+        airport_id,
+      </if>
+      <if test="carrier != null">
+        carrier,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptAgentId != null">
+        #{deptAgentId,jdbcType=BIGINT},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="airportId != null">
+        #{airportId,jdbcType=BIGINT},
+      </if>
+      <if test="carrier != null">
+        #{carrier,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cares.baseframe.model.DeptAgent">
+    update s_dept_agent
+    <set>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="airportId != null">
+        airport_id = #{airportId,jdbcType=BIGINT},
+      </if>
+      <if test="carrier != null">
+        carrier = #{carrier,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dept_agent_id = #{deptAgentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cares.baseframe.model.DeptAgent">
+    update s_dept_agent
+    set dept_id = #{deptId,jdbcType=BIGINT},
+      airport_id = #{airportId,jdbcType=BIGINT},
+      carrier = #{carrier,jdbcType=VARCHAR}
+    where dept_agent_id = #{deptAgentId,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findDeptAgentByPage" parameterType="com.cares.baseframe.bean.PageInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_dept_agent
+    where 1=1
+    <include refid="queryWhereEquals" />
+    order by ${sort} ${order}
+	LIMIT #{from}, #{size}
+  </select>
+  
+   <select id="findDeptAgentByPageCount" parameterType="com.cares.baseframe.bean.PageInfo" resultType="java.lang.Integer">
+    select  count(1)
+    from s_dept_agent
+    where 1=1
+    <include refid="queryWhereEquals" />
+  </select> 
+   <select id="fingDeptAgentVoByParam" resultMap="DeptAgentVo" parameterType="java.util.Map">
+   select d.dept_agent_id deptAgentId,d.airport_id airportId,d.dept_id deptId,d.carrier,a.APT_BRF_NM airportName,a.APT_ICAO_CD aptCd,left(a.APT_ICAO_CD,1) aptCdInitial 
+   from s_dept_agent d 
+   left join b_airport a 
+   on a.APT_ID=d.airport_id 
+    where 1=1
+    <if test="deptId != null">
+    	and  dept_id = #{deptId,jdbcType=BIGINT}
+      </if>
+      <if test="airportId != null">
+        and	 airport_id = #{airportId,jdbcType=BIGINT}
+      </if>
+      <if test="carrier != null">
+        and  carrier like '%${carrier,jdbcType=VARCHAR}%'
+      </if>
+      order by left(a.APT_ICAO_CD,1)
+  </select>
+  <select id="fingDeptAgentByParam" resultMap="BaseResultMap" parameterType="java.util.Map">
+   select 
+   <include refid="Base_Column_List" />
+   from s_dept_agent d 
+    where 1=1
+    <if test="deptId != null">
+    	and  dept_id = #{deptId,jdbcType=BIGINT}
+      </if>
+      <if test="airportId != null">
+        and	 airport_id = #{airportId,jdbcType=BIGINT}
+      </if>
+      <if test="carrier != null">
+        and  carrier like '%${carrier,jdbcType=VARCHAR}%'
+      </if>
+  </select>
+</mapper>

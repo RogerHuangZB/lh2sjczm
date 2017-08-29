@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cares.baseframe.mapper.DictTypeMapper">
+	<resultMap id="BaseResultMap" type="com.cares.baseframe.model.DictType">
+		<id column="type_id" property="typeId" />
+		<result column="type_code" property="typeCode" />
+		<result column="type_name" property="typeName" />
+		<result column="remark" property="remark" />
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+		type_id, type_code, type_name,remark
+	</sql>
+
+	<select id="findCodeDictTypePageCondition" resultMap="BaseResultMap" parameterType="com.cares.baseframe.bean.PageInfo">
+		select
+		<include refid="Base_Column_List" />
+		from b_dict_type
+		limit #{from}, #{size}
+	</select>
+
+	<select id="findCodeDictTypePageCount" resultType="java.lang.Integer" parameterType="com.cares.baseframe.bean.PageInfo">
+		select
+		count(*) count
+		from
+		b_dict_type
+	</select>
+
+
+
+	<insert id="insert" parameterType="com.cares.baseframe.model.DictType">
+		<selectKey resultType="java.lang.Long" keyProperty="typeId" order="AFTER">
+			SELECT LAST_INSERT_ID() AS typeId
+		</selectKey>
+		insert into b_dict_type (type_id,type_code, type_name,remark)
+		values (#{typeId},#{typeCode}, #{typeName},
+		#{remark})
+	</insert>
+
+
+	<update id="updateCodeDictType" parameterType="com.cares.baseframe.model.DictType">
+		update
+		b_dict_type set type_code=#{typeCode},type_name
+		=#{typeName},remark=#{remark}
+		where type_id= #{typeId}
+	</update>
+
+
+	<delete id="deleteCodeDictTypeById" parameterType="java.lang.Long">
+		delete from
+		b_dict_type
+		where type_id = #{type_id}
+	</delete>
+
+	<select id="findCodeDictTypeById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from b_dict_type
+		where type_id = #{type_id}
+	</select>
+
+	<select id="findDictTypeAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from b_dict_type
+	</select>
+
+</mapper>

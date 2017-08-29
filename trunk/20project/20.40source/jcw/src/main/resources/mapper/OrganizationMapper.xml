@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cares.baseframe.mapper.OrganizationMapper">
+    <resultMap id="BaseResultMap" type="com.cares.baseframe.bean.Organization">
+        <id column="dept_id" property="deptId" />
+        <result column="dept_name" property="deptName" />        
+        <result column="dept_code" property="deptCode" />
+        <result column="dept_icon" property="deptIcon" />
+        <result column="dept_pid" property="deptPid" />
+        <result column="seq_sort" property="seqSort" />
+        <result column="create_time" property="createTime" />
+        <result column="apt_cd" property="aptCd" />
+        <result column="creator" property="creator" />
+		<result column="modifier" property="modifier" />
+		<result column="modify_time" property="modifyTime" />
+		<result column="validity" property="validity" />
+		<result column="dept_type" property="deptType" />
+		<result column="org_type" property="orgType" />
+		<result column="carrier" property="carrier" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    dept_id, dept_name, dept_code, dept_icon, dept_pid, seq_sort, create_time, apt_cd, dept_type,org_type,carrier
+  </sql>
+<sql id="queryWhere">
+  	 <if test="condition.deptId != null and condition.deptId != ''">
+				and dept_id = #{condition.deptId}
+	 </if>
+	 <if test="condition.deptCode != null and condition.deptCode != ''">
+				and dept_code = #{condition.deptCode}
+	 </if>
+	 <if test="condition.deptPid != null and condition.deptPid != ''">
+				and dept_pid = #{condition.deptPid}
+	 </if>
+	 <if test="condition.deptName!= null and condition.deptName != ''">
+				and dept_name like '%${condition.deptName}%'
+	 </if>
+	 <if test="condition.seqSort != null and condition.seqSort != ''">
+				and seq_sort = #{condition.seqSort}
+	 </if>
+	 <if test="condition.aptCd != null and condition.aptCd != ''">
+				and apt_cd = #{condition.aptCd}
+	</if>
+	<if test="condition.deptType != null and condition.deptType != ''">
+			and dept_type = #{condition.deptType}
+	</if>
+	<if test="condition.orgType != null and condition.orgType != ''">
+			and org_type = #{condition.orgType}
+	</if>
+	<if test="condition.carrier != null and condition.carrier != ''">
+			and carrier = #{condition.carrier}
+	</if>
+ 	</sql>
+    <select id="findOrganizationAllByPidNull" resultMap="BaseResultMap">
+        select distinct
+        <include refid="Base_Column_List"/>
+        from s_dept where dept_pid is null order by seq_sort
+    </select>
+    
+    <select id="findOrganizationAllByAptCd" resultMap="BaseResultMap">
+        select distinct
+        <include refid="Base_Column_List"/>
+        from s_dept 
+        where  1=1 
+            <if test="aptCd != null and aptCd != ''">
+				and apt_cd = #{aptCd}
+			</if>
+			<if test="validity != null and validity != ''">
+				and validity = #{validity}
+			</if> 
+			<if test="deptId != null and deptId !=''">
+				and dept_id = #{deptId}
+			</if>
+        order by seq_sort
+    </select>
+
+    <select id="findOrganizationAllByPid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select distinct
+        <include refid="Base_Column_List"/>
+        from s_dept where dept_pid = #{pid} order by seq_sort
+    </select>
+
+    <select id="findOrganizationAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from s_dept 
+        where  1=1 
+            <if test="aptCd != null and aptCd != ''">
+				and apt_cd = #{aptCd}
+			</if>
+			<if test="validity != null and validity != ''">
+				and validity = #{validity}
+			</if> 
+			<if test="deptId != null and deptId !=''">
+				and dept_id = #{deptId}
+			</if>
+        order by seq_sort
+    </select>
+
+    <select id="findOrganizationById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from s_dept where dept_id = #{id}
+    </select>
+    
+     <select id="findOrganizationByDeptId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from s_dept where dept_id = #{deptId}
+    </select>
+
+    <delete id="deleteOrganizationById" parameterType="java.lang.Long">
+    delete from s_dept
+    where dept_id = #{id}
+  </delete>
+
+    <insert id="insert" parameterType="com.cares.baseframe.bean.Organization">
+        <selectKey resultType="java.lang.Long" keyProperty="deptId" order="AFTER">
+            SELECT LAST_INSERT_ID() as deptId
+        </selectKey>
+	insert into s_dept (dept_name, dept_code,dept_icon, dept_pid, seq_sort, create_time,apt_cd, creator,modifier,modify_time,validity,dept_type,org_type,carrier)
+	values
+	(#{deptName}, #{deptCode},#{deptIcon}, #{deptPid}, #{seqSort}, now(), #{aptCd}, #{creator}, #{modifier}, now(), #{validity},#{deptType},#{orgType},#{carrier})
+    </insert>
+
+    <update id="updateOrganization" parameterType="com.cares.baseframe.bean.Organization">
+        update s_dept set dept_name = #{deptName},dept_code = #{deptCode}, dept_icon = #{deptIcon}, dept_pid = #{deptPid}, seq_sort = #{seqSort},
+        create_time = now(),apt_cd = #{aptCd},creator = #{creator},modifier = #{modifier},modify_time = now(),
+        validity = #{validity},dept_type = #{deptType},org_type=#{orgType},carrier=#{carrier}
+        where dept_id = #{deptId}
+    </update>
+<select id="findOriganzationByPage" parameterType="com.cares.baseframe.bean.PageInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_dept
+    where 1=1
+    <include refid="queryWhere" />
+    order by ${sort} ${order}
+	LIMIT #{from}, #{size}
+  </select>
+  
+  <select id="findOriganzationByPageCount" parameterType="com.cares.baseframe.bean.PageInfo" resultType="java.lang.Integer">
+    select count(1)
+    from s_dept
+    where 1=1
+    <include refid="queryWhere" />
+  </select>
+</mapper>
