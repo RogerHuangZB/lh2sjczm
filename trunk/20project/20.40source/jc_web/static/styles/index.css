@@ -4,6 +4,7 @@ body {
     height: 100%;
     margin: 0;
     color: #333;
+    font-family: "Microsoft YaHei UI";
 }
 
 body {
@@ -29,19 +30,8 @@ p {
 }
 
 .container {
-    padding-top: 50px;
+    padding: 50px 0;
     min-height: 600px;
-    /*display: -webkit-box;*/
-    /*display: -ms-flexbox;*/
-    /*display: flex;*/
-    /*-webkit-box-align: start;*/
-    /*-ms-flex-align: start;*/
-    /*align-items: flex-start;*/
-    /*position: relative;*/
-    /*width: 1000px;*/
-    /*padding: 50px 16px;*/
-    /*margin: 10px auto;*/
-
 }
 
 .loginDiv {
@@ -53,26 +43,29 @@ p {
 }
 
 .searchDiv {
+    position: relative;
     padding: 10vh 0;
 }
 
 .searchDiv input {
     display: inline-block;
+    float: left;
+    margin-left: 15px;
+    width: 60%;
     height: 45px;
     font-size: 18px;
-    vertical-align: middle;
     border-radius: 0;
 }
 
 .searchDiv button {
-    display: inline-block;
-    height: 40px;
+    float: right;
+    margin-right: 15px;
+    height: 45px;
     font-size: 18px;
-    vertical-align: middle;
+    color: #ffffff;
     letter-spacing: 2px;
-    width: 10vw;
-    min-width: 85px;
-    margin-left: 5vw;
+    width: 15%;
+    min-width: 100px;
     background: transparent;
     border: 1px solid #e2e2e2;
     border-radius: 0;
@@ -82,14 +75,12 @@ p {
     background: transparent;
     box-shadow: 0 0 15px #e2e2e2;
     border: 1px solid #e2e2e2;
-    width: 11vw;
-    height:44px;
+    color: #ffffff;
 }
 
-.searchDiv input {
-    width: 50vw;
-    font-family: Microsoft YaHei;
-    margin-left: 5vw;
+.searchDiv button:focus,
+.searchDiv button:active {
+    color: #ffffff;
 }
 
 .searchDiv button span {
@@ -97,12 +88,17 @@ p {
 }
 
 
+/*搜索选项栏*/
 
 .optionsDiv {
     width: 100%;
     height: 200px;
     background: url("../img/bg.png");
 }
+
+
+
+/*机床列表*/
 
 .listDiv {
     margin-top: 2vh;
