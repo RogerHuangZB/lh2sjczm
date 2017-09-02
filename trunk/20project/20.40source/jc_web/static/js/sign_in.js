@@ -1,6 +1,6 @@
 $(function() {
-    $('#toRegisterBtn').click(function () {
-        window.location = "../../views/register.html";
+    $('#sToRegisterBtn').click(function () {
+        window.location = "./register.html";
     });
 
     $('#signInBtn').click(function () {

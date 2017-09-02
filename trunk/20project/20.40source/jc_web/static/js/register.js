@@ -1,5 +1,5 @@
 $(function() {
-    $('#registerBtn').click(function () {
+    $('#doRegisterBtn').click(function () {
         var userName = $('#userName').val();
         var password = $('#password').val();
         var pwdCheck = $('#pwdCheck').val();
