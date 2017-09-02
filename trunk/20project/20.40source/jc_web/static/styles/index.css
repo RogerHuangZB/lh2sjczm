@@ -4,17 +4,25 @@ body {
     height: 100%;
     margin: 0;
     color: #333;
-    font-family: "Microsoft YaHei UI";
 }
 
 body {
     background-color: #fff;
     background: url("../img/bg1.png") repeat;
     background-size: 100%;
+    font: 12px/1.5 Microsoft YaHei,arial,helvetica,sans-serif;
 }
 
 p {
     margin: 0;
+}
+
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
 }
 
 .navbar {
@@ -40,6 +48,11 @@ p {
     margin-right: auto;
     max-width: 400px;
     position: relative;
+    color: #ffffff;
+}
+
+.loginDiv p.help-block {
+    color: #fbfbfb;
 }
 
 .searchDiv {
@@ -90,19 +103,165 @@ p {
 
 /*搜索选项栏*/
 
-.optionsDiv {
+.Ddiv {
+    position: relative;
     width: 100%;
-    height: 200px;
-    background: url("../img/bg.png");
+    background-color: #fbfbfb;
+    padding: 7px;
+    box-shadow: 0 0 6px 3px hsla(0,0%,65%,.3);
 }
 
+.optionsDiv {
+    height: 200px;
+}
 
 
 /*机床列表*/
 
 .listDiv {
     margin-top: 2vh;
+    /*height: 1000px;*/
+}
+
+li, ol, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #24d;
+}
+
+.jclist {
     width: 100%;
-    height: 1000px;
-    background: url("../img/bg.png");
+}
+
+.jclist li {
+    float: left;
+    margin-bottom: 10px;
+}
+
+.jclist li a.jc-a {
+    display: block;
+    width: 289px;
+    height: 289px;
+    padding: 7px 7px;
+    border: 1px solid #fff;
+    position: relative;
+}
+
+.jclist li a:hover {
+    color: #495056;
+    text-decoration: none;
+}
+
+.jclist li:hover a.jc-a {
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 0 5px 2px #e6e6e6;
+}
+
+:root .jclist li:hover a.jc-a {
+    border: 1px solid #fff;
+}
+
+.jclist img {
+    width: 274px;
+    height: 183px;
+    border: 1px solid #e9e9e9;
+}
+
+.jclist li a.jc-a .t {
+    font-size: 17px;
+    color: #495056;
+    padding: 1px 0 6px 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.jclist li a.jc-a .t-i {
+    color: #a5abb2;
+    font-size: 14px;
+    padding-left: 4px;
+    padding-bottom: 2px;
+}
+
+.jclist li a.jc-a .t-i .icon-pad {
+    display: inline-block;
+    font-size: 12px;
+    width: 14px;
+    text-align: center;
+    vertical-align: top;
+    line-height: 20px;
+}
+
+.jclist li .t-price {
+    height: 30px;
+    font-size: 20px;
+    color: #f95523;
+    padding-left: 4px;
+    overflow: hidden;
+}
+
+.t-price p {
+    float: left;
+    line-height: 30px;
+}
+
+.t-price em, .t-price span {
+    font-size: 14px;
+}
+
+
+.t-price i {
+    float: right;
+    width: 44px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    margin: 5px 0 0 5px;
+}
+
+.t-price i.i-orange {
+    color: #fd651d;
+    border: 1px solid #fd651d;
+}
+
+.t-price i.i-blue {
+    color: #4084ea;
+    border: 1px solid #4084ea;
+}
+
+.t-price em {
+    float: left;
+    margin-top: 7px;
+    margin-left: 10px;
+    color: #a5abb2;
+}
+
+.t-price em.line-through {
+    text-decoration: line-through;
+}
+
+.icon-new, .icon-sale {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    display: block;
+    width: 60px;
+    height: 55px;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+    background: url(//sta.guazistatic.com/c2c_web/icon.d836d27f2b50ed89ac9009990074868d.png) no-repeat;
+}
+
+.icon-new {
+    background-position: 0 -60px;
+    line-height: 48px;
 }
