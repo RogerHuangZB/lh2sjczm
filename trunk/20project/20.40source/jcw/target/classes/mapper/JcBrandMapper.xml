@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cares.baseframe.mapper.JcBrandMapper">
+    <resultMap id="BaseResultMap" type="com.cares.baseframe.model.JcBrand">
+        <id column="bid" property="brandId" />
+        <result column="bname" property="brandName" />
+        <result column="bshortcut" property="brandShortcut" />
+        <result column="burl" property="brandUrl" />
+        <result column="blogo" property="brandLogo" />
+        <result column="remark" property="remark" />
+        <result column="sort_no" property="sortNo" />
+        <result column="validity" property="validity" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        bid, bname, bshortcut, burl, blogo, remark, sort_no, validity
+    </sql>
+
+
+<!--增-->
+    <insert id="insert" parameterType="com.cares.baseframe.model.JcBrand">
+        <selectKey resultType="java.lang.Long" keyProperty="brandId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS brandId
+        </selectKey>
+        insert into b_jc_brand (bid, bname, bshortcut, burl, blogo, remark, sort_no, validity)
+        values
+        (#{brandId},#{brandName}, #{brandShortcut}, #{brandUrl}, #{brandLogo}, #{remark}, #{sortNo}, #{validity})
+    </insert>
+
+<!--删-->
+    <update id="deleteJcBrandById" parameterType="java.lang.Long">
+        update
+        b_jc_brand
+        <set>
+                validity= 1,
+        </set>
+        where bid= #{brandId}
+    </update>
+
+<!--改-->
+    <update id="updateJcBrand" parameterType="com.cares.baseframe.model.JcBrand">
+        update
+        b_jc_brand
+        <set>
+            <if test="brandName != null">
+                bname= #{brandName},
+            </if>
+            <if test="brandShortcut != null">
+                bshortcut= #{brandShortcut},
+            </if>
+            <if test="brandUrl != null">
+                burl= #{brandUrl},
+            </if>
+            <if test="brandLogo != null">
+                blogo= #{brandLogo},
+            </if>
+            <if test="remark != null">
+                remark= #{remark},
+            </if>
+            <if test="sortNo != null">
+                sort_no= #{sortNo},
+            </if>
+            <if test="validity != null">
+                validity= #{validity},
+            </if>
+        </set>
+        where bid= #{brandId}
+    </update>
+
+<!--查-->
+    <select id="findJcBrandById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_brand
+        where bid = #{brandId}
+    </select>
+
+<!--分页查询-->
+    <select id="findJcBrandPageCondition" resultMap="BaseResultMap" parameterType="com.cares.baseframe.bean.PageInfo">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_brand
+        order by ${sort} ${order}
+        limit #{from}, #{size}
+    </select>
+
+    <select id="findJcBrandPageCount" resultType="java.lang.Integer" parameterType="com.cares.baseframe.bean.PageInfo">
+        select
+        count(*) count
+        from
+        b_jc_brand
+    </select>
+
+</mapper>

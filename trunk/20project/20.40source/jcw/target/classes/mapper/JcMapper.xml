@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cares.baseframe.mapper.JcMapper">
+    <resultMap id="BaseResultMap" type="com.cares.baseframe.model.Jc">
+        <id column="jid" property="jcId" />
+        <result column="jc_name" property="jcName" />
+        <result column="jc_type_id" property="jcTypeId" />
+        <result column="jc_brand_id" property="jcBrandId" />
+        <result column="origin" property="origin" />
+        <result column="product_time" property="productTime" />
+        <result column="used_month" property="usedMonth" />
+        <result column="is_sale" property="isSale" />
+        <result column="price" property="price" />
+        <result column="remark" property="remark" />
+        <result column="validity" property="validity" />
+        <result column="create_time" property="createTime" />
+        <result column="creator" property="creator" />
+        <result column="modify_time" property="modifyTime" />
+        <result column="modifier" property="modifier" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        jid, jc_name, jc_type_id, jc_brand_id, origin, product_time,
+        used_month, is_sale, price, remark, validity,
+        create_time, creator, modify_time, modifier
+    </sql>
+
+    <sql id="queryWhere">
+        <if test=" condition.jcName != null and condition.jcName != '' ">
+            and c.jc_name like CONCAT('%', #{condition.jcName}, '%')
+        </if>
+        <if test=" condition.jcTypeId != null and condition.jcTypeId != '' ">
+            and c.jc_type_id = #{condition.jcTypeId}
+        </if>
+        <if test=" condition.jcBrandId != null and condition.jcBrandId != '' ">
+            and c.jc_brand_id = #{condition.jcBrandId}
+        </if>
+        <if test=" condition.origin != null and condition.origin != '' ">
+            and c.origin like CONCAT('%', #{condition.origin}, '%')
+        </if>
+        <if test=" condition.usedMonthFrom != null and condition.usedMonthFrom != '' ">
+            <![CDATA[and c.used_month >= #{condition.usedMonthFrom}]]>
+        </if>
+        <if test=" condition.usedMonthTo != null and condition.usedMonthTo != '' ">
+            <![CDATA[and c.used_month <= #{condition.usedMonthTo}]]>
+        </if>
+        <if test=" condition.isSale != null and condition.isSale != '' ">
+            and c.is_sale = #{condition.isSale}
+        </if>
+        <if test=" condition.priceFrom != null and condition.priceFrom != '' ">
+            <![CDATA[and c.price >= #{condition.priceFrom}]]>
+        </if>
+        <if test=" condition.priceTo != null and condition.priceTo != '' ">
+            <![CDATA[and c.price <= #{condition.priceTo}]]>
+        </if>
+    </sql>
+
+<!--增-->
+    <insert id="insert" parameterType="com.cares.baseframe.model.Jc">
+        <selectKey resultType="java.lang.Long" keyProperty="jcId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS jcId
+        </selectKey>
+        insert into b_jc (jid, jc_name, jc_type_id, jc_brand_id, origin, product_time,
+                          used_month, is_sale, price, remark, validity, create_time, creator)
+        values (#{jcId},#{jcName}, #{jcTypeId}, #{jcBrandId}, #{origin}, #{productTime},
+                #{usedMonth}, #{isSale}, #{price}, #{remark}, #{validity}, now(), #{creator})
+    </insert>
+
+<!--删-->
+    <update id="deleteJcById" parameterType="com.cares.baseframe.model.Jc">
+        update
+        b_jc
+        <set>
+            validity = 1,
+        </set>
+        where jid= #{jcId}
+    </update>
+
+<!--改-->
+    <update id="updateJc" parameterType="com.cares.baseframe.model.Jc">
+        update
+        b_jc
+        <set>
+            <if test="jcName != null">
+                jc_name= #{jcName},
+            </if>
+            <if test="jcTypeId != null">
+                jc_type_id= #{jcTypeId},
+            </if>
+            <if test="jcBrandId != null">
+                jc_brand_id= #{jcBrandId},
+            </if>
+            <if test="origin != null">
+                origin= #{origin},
+            </if>
+            <if test="productTime != null">
+                product_time= #{productTime},
+            </if>
+            <if test="usedMonth != null">
+                used_month= #{usedMonth},
+            </if>
+            <if test="isSale != null">
+                is_sale= #{isSale},
+            </if>
+            <if test="price != null">
+                price= #{price},
+            </if>
+            <if test="remark != null">
+                remark= #{remark},
+            </if>
+            modify_time = now(),
+            modifier = #{modifier}
+        </set>
+        where jid= #{jcId}
+    </update>
+
+<!--查-->
+    <select id="findJcById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc
+        where jid = #{jcId}
+    </select>
+
+<!--分页查询-->
+    <select id="findJcPageCondition" resultMap="BaseResultMap" parameterType="com.cares.baseframe.bean.PageInfo">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc c
+        where 1=1
+        <include refid="queryWhere" />
+        order by ${sort} ${order}
+        limit #{from}, #{size}
+    </select>
+
+    <select id="findJcPageCount" resultType="java.lang.Integer" parameterType="com.cares.baseframe.bean.PageInfo">
+        select
+        count(*) count
+        from
+        b_jc c
+        where 1=1
+        <include refid="queryWhere" />
+    </select>
+
+</mapper>
