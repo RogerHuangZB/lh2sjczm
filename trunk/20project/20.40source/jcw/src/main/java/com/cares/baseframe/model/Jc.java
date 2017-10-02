@@ -76,6 +76,42 @@ public class Jc extends BaseModel{
     private Long priceTo;
 
     /**
+     * 型号
+     */
+    @Column(name = "jc_model_no")
+    private Long jcModelNo;
+
+    /**
+     * 特征参数1
+     */
+    @Column(name = "feature01")
+    private Long feature01;
+
+    /**
+     * 特征参数2
+     */
+    @Column(name = "feature02")
+    private Long feature02;
+
+    /**
+     * 特征参数3
+     */
+    @Column(name = "feature03")
+    private Long feature03;
+
+    /**
+     * 特征参数4
+     */
+    @Column(name = "feature04")
+    private Long feature04;
+
+    /**
+     * 特征参数5
+     */
+    @Column(name = "feature05")
+    private Long feature05;
+
+    /**
      * 备注
      */
     @Column(name = "remark")
@@ -259,5 +295,53 @@ public class Jc extends BaseModel{
 
     public void setPriceTo(Long priceTo) {
         this.priceTo = priceTo;
+    }
+
+    public Long getJcModelNo() {
+        return jcModelNo;
+    }
+
+    public void setJcModelNo(Long jcModelNo) {
+        this.jcModelNo = jcModelNo;
+    }
+
+    public Long getFeature01() {
+        return feature01;
+    }
+
+    public void setFeature01(Long feature01) {
+        this.feature01 = feature01;
+    }
+
+    public Long getFeature02() {
+        return feature02;
+    }
+
+    public void setFeature02(Long feature02) {
+        this.feature02 = feature02;
+    }
+
+    public Long getFeature03() {
+        return feature03;
+    }
+
+    public void setFeature03(Long feature03) {
+        this.feature03 = feature03;
+    }
+
+    public Long getFeature04() {
+        return feature04;
+    }
+
+    public void setFeature04(Long feature04) {
+        this.feature04 = feature04;
+    }
+
+    public Long getFeature05() {
+        return feature05;
+    }
+
+    public void setFeature05(Long feature05) {
+        this.feature05 = feature05;
     }
 }
