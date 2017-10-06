@@ -116,6 +116,14 @@ public class JcBrandController extends BaseController {
             condition.put("brandName", jcBrand.getBrandName());
         }
 
+        if (StringUtils.isNoneBlank(jcBrand.getBrandShortcut())) {
+            condition.put("brandShortcut", jcBrand.getBrandShortcut());
+        }
+
+        if (StringUtils.isNoneBlank(jcBrand.getRemark())) {
+            condition.put("remark", jcBrand.getRemark());
+        }
+
         pageInfo.setCondition(condition);
 
         jcBrandService.findDataGrid(pageInfo);

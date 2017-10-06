@@ -11,6 +11,12 @@
         <result column="used_month" property="usedMonth" />
         <result column="is_sale" property="isSale" />
         <result column="price" property="price" />
+        <result column="jc_model_no" property="jcModelNo" />
+        <result column="feature01" property="feature01" />
+        <result column="feature02" property="feature02" />
+        <result column="feature03" property="feature03" />
+        <result column="feature04" property="feature04" />
+        <result column="feature05" property="feature05" />
         <result column="remark" property="remark" />
         <result column="validity" property="validity" />
         <result column="create_time" property="createTime" />
@@ -21,8 +27,9 @@
 
     <sql id="Base_Column_List">
         jid, jc_name, jc_type_id, jc_brand_id, origin, product_time,
-        used_month, is_sale, price, remark, validity,
-        create_time, creator, modify_time, modifier
+        used_month, is_sale, price, jc_model_no,
+        feature01, feature02, feature03, feature04, feature05,
+        remark, validity, create_time, creator, modify_time, modifier
     </sql>
 
     <sql id="queryWhere">
@@ -61,8 +68,10 @@
             SELECT LAST_INSERT_ID() AS jcId
         </selectKey>
         insert into b_jc (jid, jc_name, jc_type_id, jc_brand_id, origin, product_time,
-                          used_month, is_sale, price, remark, validity, create_time, creator)
+                    jc_model_no, feature01, feature02, feature03, feature04, feature05,
+                    used_month, is_sale, price, remark, validity, create_time, creator)
         values (#{jcId},#{jcName}, #{jcTypeId}, #{jcBrandId}, #{origin}, #{productTime},
+                #{jc_model_no}, #{feature01}, #{feature02}, #{feature03}, #{feature04}, #{feature05},
                 #{usedMonth}, #{isSale}, #{price}, #{remark}, #{validity}, now(), #{creator})
     </insert>
 

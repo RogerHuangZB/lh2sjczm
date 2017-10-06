@@ -116,6 +116,10 @@ public class JcTypeController extends BaseController {
             condition.put("typeName", jcType.getTypeName());
         }
 
+        if (StringUtils.isNoneBlank(jcType.getRemark())) {
+            condition.put("remark", jcType.getRemark());
+        }
+
         pageInfo.setCondition(condition);
 
         jcTypeService.findDataGrid(pageInfo);
