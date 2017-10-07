@@ -72,6 +72,13 @@
         select
         <include refid="Base_Column_List" />
         from b_jc_type
+        where validity = 0
+        <if test=" condition.typeName != null and condition.typeName != '' ">
+            and tname like CONCAT('%', #{condition.typeName}, '%')
+        </if>
+        <if test=" condition.remark != null and condition.remark != '' ">
+            and remark like CONCAT('%', #{condition.remark}, '%')
+        </if>
         order by ${sort} ${order}
         limit #{from}, #{size}
     </select>
@@ -81,6 +88,13 @@
         count(*) count
         from
         b_jc_type
+        where validity = 0
+        <if test=" condition.typeName != null and condition.typeName != '' ">
+            and tname like CONCAT('%', #{condition.typeName}, '%')
+        </if>
+        <if test=" condition.remark != null and condition.remark != '' ">
+            and remark like CONCAT('%', #{condition.remark}, '%')
+        </if>
     </select>
 
 </mapper>

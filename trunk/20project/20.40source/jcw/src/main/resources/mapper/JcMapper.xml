@@ -5,7 +5,9 @@
         <id column="jid" property="jcId" />
         <result column="jc_name" property="jcName" />
         <result column="jc_type_id" property="jcTypeId" />
+        <result column="jc_type_Name" property="jcTypeName" />
         <result column="jc_brand_id" property="jcBrandId" />
+        <result column="jc_brand_Name" property="jcBrandName" />
         <result column="origin" property="origin" />
         <result column="product_time" property="productTime" />
         <result column="used_month" property="usedMonth" />
@@ -26,10 +28,10 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        jid, jc_name, jc_type_id, jc_brand_id, origin, product_time,
-        used_month, is_sale, price, jc_model_no,
-        feature01, feature02, feature03, feature04, feature05,
-        remark, validity, create_time, creator, modify_time, modifier
+        c.jid, c.jc_name, c.jc_type_id, c.jc_brand_id, c.origin, c.product_time,
+        c.used_month, c.is_sale, c.price, c.jc_model_no,
+        c.feature01, c.feature02, c.feature03, c.feature04, c.feature05,
+        c.remark, c.validity, c.create_time, c.creator, c.modify_time, c.modifier
     </sql>
 
     <sql id="queryWhere">
@@ -71,7 +73,7 @@
                     jc_model_no, feature01, feature02, feature03, feature04, feature05,
                     used_month, is_sale, price, remark, validity, create_time, creator)
         values (#{jcId},#{jcName}, #{jcTypeId}, #{jcBrandId}, #{origin}, #{productTime},
-                #{jc_model_no}, #{feature01}, #{feature02}, #{feature03}, #{feature04}, #{feature05},
+                #{jcModelNo}, #{feature01}, #{feature02}, #{feature03}, #{feature04}, #{feature05},
                 #{usedMonth}, #{isSale}, #{price}, #{remark}, #{validity}, now(), #{creator})
     </insert>
 
@@ -114,6 +116,24 @@
             <if test="price != null">
                 price= #{price},
             </if>
+            <if test="jc_model_no != null">
+                jc_model_no= #{jcModelNo},
+            </if>
+            <if test="feature01 != null">
+                feature01= #{feature01},
+            </if>
+            <if test="feature02 != null">
+                feature02= #{feature02},
+            </if>
+            <if test="feature03 != null">
+                feature03= #{feature03},
+            </if>
+            <if test="feature04 != null">
+                feature04= #{feature04},
+            </if>
+            <if test="feature05 != null">
+                feature05= #{feature05},
+            </if>
             <if test="remark != null">
                 remark= #{remark},
             </if>
@@ -127,15 +147,18 @@
     <select id="findJcById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List" />
-        from b_jc
+        from b_jc c
         where jid = #{jcId}
     </select>
 
 <!--分页查询-->
     <select id="findJcPageCondition" resultMap="BaseResultMap" parameterType="com.cares.baseframe.bean.PageInfo">
         select
+        t.tname as 'jc_type_Name', b.bname as 'jc_brand_Name',
         <include refid="Base_Column_List" />
         from b_jc c
+        left JOIN b_jc_type t on c.jc_type_id = t.tid
+        left JOIN b_jc_brand b on c.jc_brand_id = b.bid
         where 1=1
         <include refid="queryWhere" />
         order by ${sort} ${order}
@@ -143,10 +166,8 @@
     </select>
 
     <select id="findJcPageCount" resultType="java.lang.Integer" parameterType="com.cares.baseframe.bean.PageInfo">
-        select
-        count(*) count
-        from
-        b_jc c
+        select count(*) count
+        from b_jc c
         where 1=1
         <include refid="queryWhere" />
     </select>

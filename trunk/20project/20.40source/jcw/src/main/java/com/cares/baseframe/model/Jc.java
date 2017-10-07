@@ -8,7 +8,6 @@ import com.cares.baseframe.core.model.BaseModel;
 
 import java.util.Date;
 
-
 @Table(name = "b_jc")
 public class Jc extends BaseModel{
 
@@ -33,11 +32,15 @@ public class Jc extends BaseModel{
     @Column(name = "jc_type_id")
     private Long jcTypeId;
 
+    private String jcTypeName;
+
     /**
      * 品牌id
      */
     @Column(name = "jc_brand_id")
     private Long jcBrandId;
+
+    private String jcBrandName;
 
     /**
      * 原产地
@@ -76,40 +79,40 @@ public class Jc extends BaseModel{
     private Long priceTo;
 
     /**
-     * 型号
+     * 机床型号编码
      */
     @Column(name = "jc_model_no")
-    private Long jcModelNo;
+    private String jcModelNo;
 
     /**
      * 特征参数1
      */
     @Column(name = "feature01")
-    private Long feature01;
+    private String feature01;
 
     /**
      * 特征参数2
      */
     @Column(name = "feature02")
-    private Long feature02;
+    private String feature02;
 
     /**
      * 特征参数3
      */
     @Column(name = "feature03")
-    private Long feature03;
+    private String feature03;
 
     /**
      * 特征参数4
      */
     @Column(name = "feature04")
-    private Long feature04;
+    private String feature04;
 
     /**
      * 特征参数5
      */
     @Column(name = "feature05")
-    private Long feature05;
+    private String feature05;
 
     /**
      * 备注
@@ -134,6 +137,8 @@ public class Jc extends BaseModel{
      */
     private Long creator;
 
+    private String creatorName;
+
     /**
      * 更新时间
      */
@@ -144,6 +149,8 @@ public class Jc extends BaseModel{
      * 更新人id
      */
     private Long modifier;
+
+    private String modifierName;
 
     public Long getJcId() {
         return jcId;
@@ -297,51 +304,83 @@ public class Jc extends BaseModel{
         this.priceTo = priceTo;
     }
 
-    public Long getJcModelNo() {
+    public String getJcModelNo() {
         return jcModelNo;
     }
 
-    public void setJcModelNo(Long jcModelNo) {
+    public void setJcModelNo(String jcModelNo) {
         this.jcModelNo = jcModelNo;
     }
 
-    public Long getFeature01() {
+    public String getFeature01() {
         return feature01;
     }
 
-    public void setFeature01(Long feature01) {
+    public void setFeature01(String feature01) {
         this.feature01 = feature01;
     }
 
-    public Long getFeature02() {
+    public String getFeature02() {
         return feature02;
     }
 
-    public void setFeature02(Long feature02) {
+    public void setFeature02(String feature02) {
         this.feature02 = feature02;
     }
 
-    public Long getFeature03() {
+    public String getFeature03() {
         return feature03;
     }
 
-    public void setFeature03(Long feature03) {
+    public void setFeature03(String feature03) {
         this.feature03 = feature03;
     }
 
-    public Long getFeature04() {
+    public String getFeature04() {
         return feature04;
     }
 
-    public void setFeature04(Long feature04) {
+    public void setFeature04(String feature04) {
         this.feature04 = feature04;
     }
 
-    public Long getFeature05() {
+    public String getFeature05() {
         return feature05;
     }
 
-    public void setFeature05(Long feature05) {
+    public void setFeature05(String feature05) {
         this.feature05 = feature05;
+    }
+
+    public String getJcTypeName() {
+        return jcTypeName;
+    }
+
+    public void setJcTypeName(String jcTypeName) {
+        this.jcTypeName = jcTypeName;
+    }
+
+    public String getJcBrandName() {
+        return jcBrandName;
+    }
+
+    public void setJcBrandName(String jcBrandName) {
+        this.jcBrandName = jcBrandName;
+    }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+
+    public String getModifierName() {
+        return modifierName;
+    }
+
+    public void setModifierName(String modifierName) {
+        this.modifierName = modifierName;
     }
 }
