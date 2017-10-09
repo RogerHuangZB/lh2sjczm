@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JcBrandServiceImpl implements JcBrandService {
 
@@ -41,5 +43,10 @@ public class JcBrandServiceImpl implements JcBrandService {
     public void findDataGrid(PageInfo pageInfo) {
         pageInfo.setRows(jcBrandMapper.findJcBrandPageCondition(pageInfo));
         pageInfo.setTotal(jcBrandMapper.findJcBrandPageCount(pageInfo));
+    }
+
+    @Override
+    public List<JcBrand> jcBrandDataAll(Long brandId) {
+        return jcBrandMapper.jcBrandDataAll();
     }
 }

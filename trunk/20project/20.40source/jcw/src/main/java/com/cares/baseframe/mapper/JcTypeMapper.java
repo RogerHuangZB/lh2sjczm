@@ -25,4 +25,6 @@ public interface JcTypeMapper {
     //分页
     List findJcTypePageCondition(PageInfo pageInfo);
     int findJcTypePageCount(PageInfo pageInfo);
+
+    List<JcType> jcTypeDataAll();
 }

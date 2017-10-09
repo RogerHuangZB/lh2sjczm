@@ -1,10 +1,14 @@
 package com.cares.baseframe.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.cares.baseframe.bean.PageInfo;
 import com.cares.baseframe.core.response.BaseResult;
 import com.cares.baseframe.model.Jc;
 import com.cares.baseframe.service.JcService;
 import com.google.common.collect.Maps;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +55,9 @@ public class JcController extends BaseController {
     public BaseResult add(Jc jc) {
         try {
             jc.setCreator(1L);//TODO:...
+            String productTimeStr = jc.getProductTimeStr();
+            Date productTime = new Date(productTimeStr);
+            jc.setProductTime(productTime);
             jcService.addJc(jc);
             return BaseResult.success();
         } catch (RuntimeException e) {
@@ -88,6 +95,9 @@ public class JcController extends BaseController {
     public BaseResult edit(Jc jc) {
         try {
             jc.setModifier(1L);//TODO:...
+            String productTimeStr = jc.getProductTimeStr();
+            Date productTime = new Date(productTimeStr);
+            jc.setProductTime(productTime);
             jcService.updateJc(jc);
             return BaseResult.success();
         } catch (RuntimeException e) {

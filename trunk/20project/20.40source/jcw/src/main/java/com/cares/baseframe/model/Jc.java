@@ -54,6 +54,8 @@ public class Jc extends BaseModel{
     @Column(name = "product_time")
     private Date productTime;
 
+    private String productTimeStr;
+
     /**
      * 使用月数
      */
@@ -198,6 +200,14 @@ public class Jc extends BaseModel{
 
     public void setProductTime(Date productTime) {
         this.productTime = productTime;
+    }
+
+    public String getProductTimeStr() {
+        return productTimeStr;
+    }
+
+    public void setProductTimeStr(String productTimeStr) {
+        this.productTimeStr = productTimeStr;
     }
 
     public Integer getUsedMonth() {

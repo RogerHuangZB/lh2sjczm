@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JcTypeServiceImpl implements JcTypeService {
 
@@ -41,5 +43,10 @@ public class JcTypeServiceImpl implements JcTypeService {
     public void findDataGrid(PageInfo pageInfo) {
         pageInfo.setRows(jcTypeMapper.findJcTypePageCondition(pageInfo));
         pageInfo.setTotal(jcTypeMapper.findJcTypePageCount(pageInfo));
+    }
+
+    @Override
+    public List<JcType> jcTypeDataAll() {
+        return jcTypeMapper.jcTypeDataAll();
     }
 }

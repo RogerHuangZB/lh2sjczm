@@ -3,6 +3,8 @@ package com.cares.baseframe.service;
 import com.cares.baseframe.bean.PageInfo;
 import com.cares.baseframe.model.JcType;
 
+import java.util.List;
+
 public interface JcTypeService {
 
     void addJcType(JcType jcType);
@@ -14,4 +16,6 @@ public interface JcTypeService {
     JcType findJcTypeById(Long typeId);
 
     void findDataGrid(PageInfo pageInfo);
+
+    List<JcType> jcTypeDataAll();
 }

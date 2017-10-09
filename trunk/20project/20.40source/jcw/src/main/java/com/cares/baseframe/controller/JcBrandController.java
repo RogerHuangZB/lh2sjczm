@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -93,6 +94,17 @@ public class JcBrandController extends BaseController {
     public JcBrand findJcBrandById(Long brandId) {
         JcBrand jcBrand = jcBrandService.findJcBrandById(brandId);
         return jcBrand;
+    }
+
+    /**
+     * 查询所有机床品牌
+     * @return
+     */
+    @RequestMapping(value = "/dataAll", method = RequestMethod.POST)
+
+    public List<JcBrand> jcBrandDataAll(Long brandId) {
+        List<JcBrand> jcBrandList = jcBrandService.jcBrandDataAll(brandId);
+        return jcBrandList;
     }
 
     /**

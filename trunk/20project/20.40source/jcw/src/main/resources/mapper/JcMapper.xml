@@ -116,7 +116,7 @@
             <if test="price != null">
                 price= #{price},
             </if>
-            <if test="jc_model_no != null">
+            <if test="jcModelNo != null">
                 jc_model_no= #{jcModelNo},
             </if>
             <if test="feature01 != null">
@@ -159,7 +159,7 @@
         from b_jc c
         left JOIN b_jc_type t on c.jc_type_id = t.tid
         left JOIN b_jc_brand b on c.jc_brand_id = b.bid
-        where 1=1
+        where c.validity = 0
         <include refid="queryWhere" />
         order by ${sort} ${order}
         limit #{from}, #{size}
@@ -168,7 +168,7 @@
     <select id="findJcPageCount" resultType="java.lang.Integer" parameterType="com.cares.baseframe.bean.PageInfo">
         select count(*) count
         from b_jc c
-        where 1=1
+        where c.validity = 0
         <include refid="queryWhere" />
     </select>
 

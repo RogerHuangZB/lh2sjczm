@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -93,6 +94,17 @@ public class JcTypeController extends BaseController {
     public JcType findJcTypeById(Long typeId) {
         JcType jcType = jcTypeService.findJcTypeById(typeId);
         return jcType;
+    }
+
+    /**
+     * 查询所有机床类型
+     * @return
+     */
+    @RequestMapping(value = "/dataAll", method = RequestMethod.POST)
+
+    public List<JcType> jcTypeDataAll() {
+        List<JcType> jcTypeList = jcTypeService.jcTypeDataAll();
+        return jcTypeList;
     }
 
     /**

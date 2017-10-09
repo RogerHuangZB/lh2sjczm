@@ -67,6 +67,14 @@
         where tid = #{typeId}
     </select>
 
+    <!--dataAll-->
+    <select id="jcTypeDataAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_type
+        where validity = 0
+    </select>
+
 <!--分页查询-->
     <select id="findJcTypePageCondition" resultMap="BaseResultMap" parameterType="com.cares.baseframe.bean.PageInfo">
         select

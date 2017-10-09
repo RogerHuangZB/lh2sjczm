@@ -25,4 +25,6 @@ public interface JcBrandMapper {
     //分页
     List findJcBrandPageCondition(PageInfo pageInfo);
     int findJcBrandPageCount(PageInfo pageInfo);
+
+    List<JcBrand> jcBrandDataAll();
 }
