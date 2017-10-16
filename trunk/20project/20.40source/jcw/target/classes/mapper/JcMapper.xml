@@ -53,7 +53,7 @@
         <if test=" condition.usedMonthTo != null and condition.usedMonthTo != '' ">
             <![CDATA[and c.used_month <= #{condition.usedMonthTo}]]>
         </if>
-        <if test=" condition.isSale != null and condition.isSale != '' ">
+        <if test=" condition.isSale != null and condition.isSale != '' or 0 == condition.isSale ">
             and c.is_sale = #{condition.isSale}
         </if>
         <if test=" condition.priceFrom != null and condition.priceFrom != '' ">

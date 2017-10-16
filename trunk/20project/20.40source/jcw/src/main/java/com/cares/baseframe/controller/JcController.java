@@ -7,6 +7,7 @@ import com.cares.baseframe.bean.PageInfo;
 import com.cares.baseframe.core.response.BaseResult;
 import com.cares.baseframe.model.Jc;
 import com.cares.baseframe.service.JcService;
+import com.cares.baseframe.util.UpLoadFileUtils;
 import com.google.common.collect.Maps;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.lang3.StringUtils;
@@ -15,11 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -170,6 +170,19 @@ public class JcController extends BaseController {
         jcService.findDataGrid(pageInfo);
 
         return pageInfo;
+    }
+
+    // 上传图片
+    @RequestMapping(value = "/addJcPics", method = RequestMethod.POST)
+    @ResponseBody
+    public BaseResult addJcPics(HttpServletRequest request) {
+        String rPath = "/home/user01/jcpics/";
+        Map<String, Object> map = UpLoadFileUtils.uploadFile(request, rPath);
+
+
+
+
+        return BaseResult.success();
     }
 
 }
