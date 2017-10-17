@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cares.baseframe.mapper.JcPicMapper">
+    <resultMap id="BaseResultMap" type="com.cares.baseframe.model.JcPic">
+        <id column="pid" property="picId" />
+        <result column="pname" property="picName" />
+        <result column="directory" property="directory" />
+        <result column="pathurl" property="pathUrl" />
+        <result column="jid" property="jcId" />
+        <result column="remark" property="remark" />
+        <result column="sort_no" property="sortNo" />
+        <result column="validity" property="validity" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        pid, pname, directory, pathurl, jid, remark, sort_no, validity
+    </sql>
+
+
+<!--增-->
+    <insert id="insert" parameterType="com.cares.baseframe.model.JcPic">
+        <selectKey resultType="java.lang.Long" keyProperty="picId" order="AFTER">
+            SELECT LAST_INSERT_ID() AS picId
+        </selectKey>
+        insert into b_jc_pic (pid, pname, directory, pathurl, jid, remark, sort_no, validity)
+        values
+        (#{picId}, #{picName}, #{directory}, #{pathUrl}, #{jcId}, #{remark}, #{sortNo}, #{validity})
+    </insert>
+
+<!--删-->
+    <update id="deleteJcPicById" parameterType="java.lang.Long">
+        update
+        b_jc_pic
+        <set>
+                validity= 1,
+        </set>
+        where pid= #{picId}
+    </update>
+
+<!--改-->
+    <update id="updateJcPic" parameterType="com.cares.baseframe.model.JcPic">
+        update
+        b_jc_pic
+        <set>
+            <if test="picName != null">
+                pname= #{picName},
+            </if>
+            <if test="directory != null">
+                directory= #{directory},
+            </if>
+            <if test="pathUrl != null">
+                pathurl= #{pathUrl},
+            </if>
+            <if test="jcId != null">
+                jid= #{jcId},
+            </if>
+            <if test="remark != null">
+                remark= #{remark},
+            </if>
+            <if test="sortNo != null">
+                sort_no= #{sortNo},
+            </if>
+            <if test="validity != null">
+                validity= #{validity},
+            </if>
+        </set>
+        where pid= #{picId}
+    </update>
+
+<!--查-->
+    <select id="queryJcPics" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_pic
+        where jid = #{jcId}
+    </select>
+
+</mapper>

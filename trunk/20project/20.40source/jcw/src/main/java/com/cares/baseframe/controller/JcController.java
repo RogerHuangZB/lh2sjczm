@@ -6,6 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.cares.baseframe.bean.PageInfo;
 import com.cares.baseframe.core.response.BaseResult;
 import com.cares.baseframe.model.Jc;
+import com.cares.baseframe.model.JcPic;
+import com.cares.baseframe.service.JcPicService;
 import com.cares.baseframe.service.JcService;
 import com.cares.baseframe.util.UpLoadFileUtils;
 import com.google.common.collect.Maps;
@@ -24,7 +26,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +44,9 @@ public class JcController extends BaseController {
 
     @Autowired
     private JcService jcService;
+
+    @Autowired
+    private JcPicService jcPicService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -183,11 +190,24 @@ public class JcController extends BaseController {
         String rPath = "E:\\jcpics\\";
         Map<String, Object> map = UpLoadFileUtils.uploadFile(request, rPath);
 
+        List<String> pathList=new ArrayList<String>();
+
+        pathList = (List<String>) map.get("pathList");
+
         Map<String,String[]> parameterMap = request.getParameterMap();
         Long jcId = Long.valueOf(parameterMap.get("jcId")[0]);
 
+        JcPic pic = new JcPic();
 
+        pic.setJcId(jcId);
+        pic.setDirectory("jcpics");
+        pic.setPicName(pathList.get(0).replace("/",""));
+        pic.setPathUrl(rPath + "");
+        pic.setValidity((byte) 0);
+        pic.setRemark("");
+        /*pic.setSortNo(0);*/
 
+        jcPicService.addJcPic(pic);
 
 
         return BaseResult.success();
