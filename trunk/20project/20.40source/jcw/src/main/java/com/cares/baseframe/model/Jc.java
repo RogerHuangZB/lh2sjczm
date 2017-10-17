@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import com.cares.baseframe.core.model.BaseModel;
 
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "b_jc")
 public class Jc extends BaseModel{
@@ -115,6 +116,8 @@ public class Jc extends BaseModel{
      */
     @Column(name = "feature05")
     private String feature05;
+
+    private List<JcPic> jcPics;
 
     /**
      * 备注
@@ -392,5 +395,13 @@ public class Jc extends BaseModel{
 
     public void setModifierName(String modifierName) {
         this.modifierName = modifierName;
+    }
+
+    public List<JcPic> getJcPics() {
+        return jcPics;
+    }
+
+    public void setJcPics(List<JcPic> jcPics) {
+        this.jcPics = jcPics;
     }
 }

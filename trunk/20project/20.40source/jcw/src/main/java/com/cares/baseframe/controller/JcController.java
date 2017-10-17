@@ -15,8 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
@@ -173,11 +176,16 @@ public class JcController extends BaseController {
     }
 
     // 上传图片
-    @RequestMapping(value = "/addJcPics", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadJcPic", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult addJcPics(HttpServletRequest request) {
-        String rPath = "/home/user01/jcpics/";
+        /*String rPath = "/jcw/jcpics/";*/
+        String rPath = "E:\\jcpics\\";
         Map<String, Object> map = UpLoadFileUtils.uploadFile(request, rPath);
+
+        Map<String,String[]> parameterMap = request.getParameterMap();
+        Long jcId = Long.valueOf(parameterMap.get("jcId")[0]);
+
 
 
 

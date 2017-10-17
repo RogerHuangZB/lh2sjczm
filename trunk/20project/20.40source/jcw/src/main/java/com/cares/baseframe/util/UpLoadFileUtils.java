@@ -106,16 +106,18 @@ public class UpLoadFileUtils {
 				for(String str : fileMap.keySet()){
 				List<MultipartFile> fileItemsList = fileMap.get(str);
 				for (int i = 0; i < fileItemsList.size(); i++) {
-					String fileName = fileItemsList.get(i).getName();
+					String fileName = fileItemsList.get(i).getOriginalFilename();
 					String f2 = fileName.substring(fileName.lastIndexOf("."));//".jpg"
 					if(f2==null || f2.trim().equals("") ){
 						break;
 					}
 					SimpleDateFormat df=new SimpleDateFormat("yyyyMMdd");
 					//创建文件路径
-					String realPath = rPath+"/"+df.format(new Date()) +"/"+new Date().getTime()+i+f2;
-					
-					pathList.add("/"+df.format(new Date()) +"/"+new Date().getTime()+i+f2);
+					/*String realPath = rPath+"/"+df.format(new Date()) +"/"+new Date().getTime()+i+f2;*/
+					String realPath = rPath+"/"+new Date().getTime()+i+f2;
+
+					String fname = new Date().getTime()+i+f2;
+					pathList.add("/"+fname);
 					
 					//保存文件到服务器上 
 					File file = new File(realPath);
@@ -126,7 +128,8 @@ public class UpLoadFileUtils {
 				}
 				}
 				//表单处理
-				
+
+				map.put("pathList", pathList);
 				
 				Map<String, String[]> params = multipartRequest.getParameterMap();
 				for(String name : params.keySet()){
