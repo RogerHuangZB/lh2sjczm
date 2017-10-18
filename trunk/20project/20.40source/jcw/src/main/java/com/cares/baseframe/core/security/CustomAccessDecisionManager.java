@@ -51,6 +51,11 @@ public class CustomAccessDecisionManager implements AccessDecisionManager {
 		if(matcher.matches(request)){
 			return;
 		}
+		//忽略jcPic请求拦截
+		matcher=new AntPathRequestMatcher("/jcPic/*");
+		if(matcher.matches(request)){
+			return;
+		}
 		//url 比较
 		for (GrantedAuthority ga : authentication.getAuthorities()) {
 			SimpleGrantedAuthority urlGrantedAuthority = (SimpleGrantedAuthority) ga;

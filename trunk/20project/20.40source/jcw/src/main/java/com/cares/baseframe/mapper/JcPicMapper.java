@@ -16,4 +16,6 @@ public interface JcPicMapper {
     void updateJcPic(JcPic jcPic);
 
     List<JcPic> queryJcPics(Long jcId);
+
+    void deleteJcPic(JcPic jcPic);
 }

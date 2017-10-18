@@ -16,4 +16,6 @@ public interface JcPicService {
     void updateJcPic(JcPic jcPic);
 
     List<JcPic> findJcPicsByJcId(Long jcId);
+
+    void deleteJcPic(JcPic jcPic);
 }

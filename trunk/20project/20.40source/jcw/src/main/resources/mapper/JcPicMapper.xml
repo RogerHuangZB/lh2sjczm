@@ -27,7 +27,7 @@
         (#{picId}, #{picName}, #{directory}, #{pathUrl}, #{jcId}, #{remark}, #{sortNo}, #{validity})
     </insert>
 
-<!--删-->
+<!--id删-->
     <update id="deleteJcPicById" parameterType="java.lang.Long">
         update
         b_jc_pic
@@ -35,6 +35,25 @@
                 validity= 1,
         </set>
         where pid= #{picId}
+    </update>
+
+<!--pic删-->
+    <update id="deleteJcPic" parameterType="com.cares.baseframe.model.JcPic">
+        update
+        b_jc_pic
+        <set>
+            validity= 1,
+        </set>
+        where 1=1
+        <if test="picId != null">
+            and pid= #{picId}
+        </if>
+        <if test="picName != null">
+            and pname= #{picName}
+        </if>
+        <if test="jcId != null">
+            and jid= #{jcId}
+        </if>
     </update>
 
 <!--改-->
@@ -72,7 +91,8 @@
         select
         <include refid="Base_Column_List" />
         from b_jc_pic
-        where jid = #{jcId}
+        where validity = 0
+        and jid = #{jcId}
     </select>
 
 </mapper>

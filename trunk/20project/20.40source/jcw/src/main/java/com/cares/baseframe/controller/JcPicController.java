@@ -56,11 +56,29 @@ public class JcPicController extends BaseController {
      * @param picId
      * @return
      */
-    @RequestMapping("/delete")
+    @RequestMapping("/deleteById")
 
-    public BaseResult delete(Long picId) {
+    public BaseResult deleteById(Long picId) {
         try {
             jcPicService.deleteJcPicById(picId);
+            return BaseResult.success();
+        } catch (RuntimeException e) {
+            logger.error("删除机床图片失败：{}", e);
+            return BaseResult.fail(e.getMessage());
+        }
+    }
+
+    /**
+     * 删除机床图片
+     *
+     * @param jcPic
+     * @return
+     */
+    @RequestMapping("/delete")
+
+    public BaseResult delete(JcPic jcPic) {
+        try {
+            jcPicService.deleteJcPic(jcPic);
             return BaseResult.success();
         } catch (RuntimeException e) {
             logger.error("删除机床图片失败：{}", e);

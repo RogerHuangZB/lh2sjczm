@@ -209,8 +209,7 @@ public class JcController extends BaseController {
 
         jcPicService.addJcPic(pic);
 
-
-        return BaseResult.success();
+        return BaseResult.success(pic);
     }
 
 }

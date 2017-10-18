@@ -38,4 +38,9 @@ public class JcPicServiceImpl implements JcPicService {
     public List<JcPic> findJcPicsByJcId(Long jcId) {
         return jcPicMapper.queryJcPics(jcId);
     }
+
+    @Override
+    public void deleteJcPic(JcPic jcPic) {
+        jcPicMapper.deleteJcPic(jcPic);
+    }
 }

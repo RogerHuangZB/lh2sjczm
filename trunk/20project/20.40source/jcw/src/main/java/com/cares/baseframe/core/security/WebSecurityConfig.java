@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/jc/*").permitAll()
 				.antMatchers("/jcType/*").permitAll()
 				.antMatchers("/jcBrand/*").permitAll()
+				.antMatchers("/jcPic/*").permitAll()
 				// 除上面外的所有请求全部需要鉴权认证
 				.anyRequest().authenticated();
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
