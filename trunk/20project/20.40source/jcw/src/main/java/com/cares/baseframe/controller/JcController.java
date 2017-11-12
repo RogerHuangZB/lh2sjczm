@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -178,6 +179,15 @@ public class JcController extends BaseController {
         pageInfo.setCondition(condition);
 
         jcService.findDataGrid(pageInfo);
+        List<Jc> jcList =(List<Jc>) pageInfo.getRows();
+
+        if(!CollectionUtils.isEmpty(jcList)){
+            for(Jc vo: jcList){
+                List<JcPic>  jcPicList= jcPicService.findJcPicsByJcId(vo.getJcId());
+                vo.setJcPics(jcPicList);
+            }
+        }
+        pageInfo.setRows(jcList);
 
         return pageInfo;
     }
@@ -186,7 +196,7 @@ public class JcController extends BaseController {
     @RequestMapping(value = "/uploadJcPic", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult addJcPics(HttpServletRequest request) {
-        /*String rPath = "/jcw/jcpics/";*/
+        /*String rPath = "/jc_pics/";*/
         String rPath = "E:\\jcpics\\";
         Map<String, Object> map = UpLoadFileUtils.uploadFile(request, rPath);
 
@@ -200,7 +210,7 @@ public class JcController extends BaseController {
         JcPic pic = new JcPic();
 
         pic.setJcId(jcId);
-        pic.setDirectory("jcpics");
+        pic.setDirectory("jc_pics");
         pic.setPicName(pathList.get(0).replace("/",""));
         pic.setPathUrl(rPath + "");
         pic.setValidity((byte) 0);
