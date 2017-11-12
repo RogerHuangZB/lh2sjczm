@@ -196,8 +196,8 @@ public class JcController extends BaseController {
     @RequestMapping(value = "/uploadJcPic", method = RequestMethod.POST)
     @ResponseBody
     public BaseResult addJcPics(HttpServletRequest request) {
-        /*String rPath = "/jc_pics/";*/
-        String rPath = "E:\\jcpics\\";
+        String rPath = "/jcw/jc_pics/";
+        /*String rPath = "E:\\jcpics\\";*/
         Map<String, Object> map = UpLoadFileUtils.uploadFile(request, rPath);
 
         List<String> pathList=new ArrayList<String>();
