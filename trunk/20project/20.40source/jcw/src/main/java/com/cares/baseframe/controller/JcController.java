@@ -197,12 +197,16 @@ public class JcController extends BaseController {
     @ResponseBody
     public BaseResult addJcPics(HttpServletRequest request) {
         String rPath = "/jcw/jc_pics/";
-        /*String rPath = "E:\\jcpics\\";*/
+        /*String rPath = "E:\\jc_pics\\";*/
         Map<String, Object> map = UpLoadFileUtils.uploadFile(request, rPath);
 
         List<String> pathList=new ArrayList<String>();
 
         pathList = (List<String>) map.get("pathList");
+
+        if(pathList.isEmpty()){
+            return BaseResult.fail("上传失败");
+        }
 
         Map<String,String[]> parameterMap = request.getParameterMap();
         Long jcId = Long.valueOf(parameterMap.get("jcId")[0]);

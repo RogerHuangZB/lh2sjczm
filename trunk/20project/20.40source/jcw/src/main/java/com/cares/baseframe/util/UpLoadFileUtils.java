@@ -114,9 +114,9 @@ public class UpLoadFileUtils {
 					SimpleDateFormat df=new SimpleDateFormat("yyyyMMdd");
 					//创建文件路径
 					/*String realPath = rPath+"/"+df.format(new Date()) +"/"+new Date().getTime()+i+f2;*/
-					String realPath = rPath+"/"+new Date().getTime()+i+f2;
+					String fname = ""+new Date().getTime()+i+f2;
+					String realPath = rPath+"/"+fname;
 
-					String fname = new Date().getTime()+i+f2;
 					pathList.add("/"+fname);
 					
 					//保存文件到服务器上 
