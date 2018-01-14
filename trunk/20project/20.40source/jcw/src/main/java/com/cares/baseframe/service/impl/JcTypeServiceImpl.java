@@ -1,9 +1,12 @@
 package com.cares.baseframe.service.impl;
 
 import com.cares.baseframe.bean.PageInfo;
+import com.cares.baseframe.bean.Tree;
 import com.cares.baseframe.mapper.JcTypeMapper;
 import com.cares.baseframe.model.JcType;
+import com.cares.baseframe.model.JcTypeTree;
 import com.cares.baseframe.service.JcTypeService;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +51,32 @@ public class JcTypeServiceImpl implements JcTypeService {
     @Override
     public List<JcType> jcTypeDataAll() {
         return jcTypeMapper.jcTypeDataAll();
+    }
+
+    @Override
+    public List<JcTypeTree> getJcTypeTree() {
+        List<JcTypeTree> rootTypes = jcTypeMapper.findRootJcTypes();
+        if (rootTypes == null) {
+            return null;
+        }
+        rcChildJcTypes(rootTypes);
+
+        return rootTypes;
+    }
+
+    /**
+     * 递归树查询
+     * @param parentTypeList
+     * return
+    */
+    private void rcChildJcTypes(List<JcTypeTree> parentTypeList) {
+        if (parentTypeList == null) {
+            return;
+        }
+        for (JcTypeTree parentType : parentTypeList) {
+            List<JcTypeTree> childTypes = jcTypeMapper.findChildJcTypes(parentType.getTypeId());
+            rcChildJcTypes(childTypes);
+            parentType.setChildren(childTypes);
+        }
     }
 }

@@ -105,4 +105,22 @@
         </if>
     </select>
 
+    <!--findRootJcTypes-->
+    <select id="findRootJcTypes" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_type
+        where validity = 0
+          and tpid = 0
+    </select>
+
+    <!--findChildJcTypes-->
+    <select id="findChildJcTypes" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List" />
+        from b_jc_type
+        where validity = 0
+          and tpid = #{typePid}
+    </select>
+
 </mapper>

@@ -2,6 +2,7 @@ package com.cares.baseframe.mapper;
 
 import com.cares.baseframe.bean.PageInfo;
 import com.cares.baseframe.model.JcType;
+import com.cares.baseframe.model.JcTypeTree;
 
 import java.util.List;
 
@@ -27,4 +28,8 @@ public interface JcTypeMapper {
     int findJcTypePageCount(PageInfo pageInfo);
 
     List<JcType> jcTypeDataAll();
+
+    List<JcTypeTree> findRootJcTypes();
+
+    List<JcTypeTree> findChildJcTypes(Long typePid);
 }

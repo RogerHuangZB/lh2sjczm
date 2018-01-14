@@ -1,18 +1,14 @@
 package com.cares.baseframe.model;
 
+import com.cares.baseframe.core.model.BaseModel;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.cares.baseframe.core.model.BaseModel;
-
 import java.util.List;
 
-
 @Table(name = "b_jc_type")
-public class JcType extends BaseModel{
+public class JcTypeTree extends BaseModel {
 
-    private static final long serialVersionUID = -7513095533609947150L;
     /**
      * 主键
      */
@@ -31,6 +27,16 @@ public class JcType extends BaseModel{
      */
     @Column(name = "tpid")
     private Long typePid;
+
+    /**
+     * 父类型名
+     */
+    private String pTypeName;
+
+    /**
+     * 子类型list
+     */
+    private List<JcTypeTree> children;
 
     /**
      * 备注
@@ -73,6 +79,22 @@ public class JcType extends BaseModel{
 
     public void setTypePid(Long typePid) {
         this.typePid = typePid;
+    }
+
+    public String getpTypeName() {
+        return pTypeName;
+    }
+
+    public void setpTypeName(String pTypeName) {
+        this.pTypeName = pTypeName;
+    }
+
+    public List<JcTypeTree> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<JcTypeTree> children) {
+        this.children = children;
     }
 
     public String getRemark() {
