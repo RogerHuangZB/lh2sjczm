@@ -3,6 +3,7 @@ package com.cares.baseframe.controller;
 import com.cares.baseframe.bean.PageInfo;
 import com.cares.baseframe.core.response.BaseResult;
 import com.cares.baseframe.model.JcType;
+import com.cares.baseframe.model.JcTypeTree;
 import com.cares.baseframe.service.JcTypeService;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -105,6 +106,17 @@ public class JcTypeController extends BaseController {
     public List<JcType> jcTypeDataAll() {
         List<JcType> jcTypeList = jcTypeService.jcTypeDataAll();
         return jcTypeList;
+    }
+
+    /**
+     * 机床类型树
+     * @return
+     */
+    @RequestMapping(value = "/treeData", method = RequestMethod.POST)
+
+    public List<JcTypeTree> getJcTypeTree() {
+        List<JcTypeTree> jcTypeTree = jcTypeService.getJcTypeTree();
+        return jcTypeTree;
     }
 
     /**

@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ebaf74d7-813a-4246-91b3-a3b447264152" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/model/JcTypeTree.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cares/baseframe/controller/JcController.class" afterPath="$PROJECT_DIR$/target/classes/com/cares/baseframe/controller/JcController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/mapper/JcTypeMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/mapper/JcTypeMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/model/JcType.java" afterPath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/model/JcType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/JcTypeService.java" afterPath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/JcTypeService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/impl/JcTypeServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/impl/JcTypeServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/JcTypeMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/JcTypeMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcTypeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcTypeController.java" />
     </list>
     <list id="c5912f78-c61b-4bfc-908b-69ffaf2f4dbc" name="cbt-admin-web" comment="cbt-admin-web" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -89,21 +84,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JcTypeController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JcTypeController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcTypeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="105" column="48" lean-forward="false" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
+            <state relative-caret-position="160">
+              <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JcTypeServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JcTypeServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/impl/JcTypeServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="67" column="12" lean-forward="true" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
+            <state relative-caret-position="202">
+              <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="41" />
               <folding>
                 <element signature="e#1458#1459#0" expanded="true" />
                 <element signature="e#1509#1510#0" expanded="true" />
@@ -115,8 +110,8 @@
       <file leaf-file-name="JcTypeService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/JcTypeService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="33" lean-forward="true" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+            <state relative-caret-position="437">
+              <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -197,7 +192,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.classpath" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcTypeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcBrandController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/JcBrandService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/impl/JcBrandServiceImpl.java" />
@@ -223,6 +217,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/mapper/JcTypeMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/JcTypeService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/impl/JcTypeServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcTypeController.java" />
       </list>
     </option>
   </component>
@@ -1160,7 +1155,7 @@
       <workItem from="1511244661541" duration="888000" />
       <workItem from="1511246979864" duration="3443000" />
       <workItem from="1511272053985" duration="833000" />
-      <workItem from="1515893848775" duration="10044000" />
+      <workItem from="1515893848775" duration="10183000" />
     </task>
     <task id="LOCAL-00001" summary="0.0.1">
       <created>1501906857431</created>
@@ -1302,11 +1297,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511272152132</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="机床类型树查询">
+      <created>1515920363330</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1515920363330</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="192015000" />
+    <option name="totallyTimeSpent" value="192154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-8" width="1316" height="784" extended-state="6" />
@@ -1383,7 +1385,8 @@
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
     <MESSAGE value="0.0.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.1" />
+    <MESSAGE value="机床类型树查询" />
+    <option name="LAST_COMMIT_MESSAGE" value="机床类型树查询" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1832,30 +1835,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/JcTypeService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="21" column="33" lean-forward="true" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+        <state relative-caret-position="437">
+          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcTypeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="105" column="48" lean-forward="false" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cares/baseframe/service/impl/JcTypeServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="67" column="12" lean-forward="true" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
+        <state relative-caret-position="202">
+          <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="41" />
           <folding>
             <element signature="e#1458#1459#0" expanded="true" />
             <element signature="e#1509#1510#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cares/baseframe/controller/JcTypeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="119" column="5" lean-forward="true" selection-start-line="119" selection-start-column="5" selection-end-line="119" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
