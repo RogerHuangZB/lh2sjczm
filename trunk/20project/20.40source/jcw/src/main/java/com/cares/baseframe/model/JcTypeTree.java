@@ -34,11 +34,6 @@ public class JcTypeTree extends BaseModel {
     private String pTypeName;
 
     /**
-     * 子类型list
-     */
-    private List<JcTypeTree> children;
-
-    /**
      * 备注
      */
     @Column(name = "remark")
@@ -55,6 +50,11 @@ public class JcTypeTree extends BaseModel {
      */
     @Column(name = "validity")
     private Byte validity;
+
+    /**
+     * 子类型list
+     */
+    private List<JcTypeTree> children;
 
 
     public Long getTypeId() {

@@ -10,6 +10,15 @@
         <result column="validity" property="validity" />
     </resultMap>
 
+    <resultMap id="TreeResultMap" type="com.cares.baseframe.model.JcTypeTree">
+        <id column="tid" property="typeId" />
+        <result column="tname" property="typeName" />
+        <result column="tpid" property="typePid" />
+        <result column="remark" property="remark" />
+        <result column="sort_no" property="sortNo" />
+        <result column="validity" property="validity" />
+    </resultMap>
+
     <sql id="Base_Column_List">
         tid, tname, tpid, remark, sort_no, validity
     </sql>
@@ -106,7 +115,7 @@
     </select>
 
     <!--findRootJcTypes-->
-    <select id="findRootJcTypes" resultMap="BaseResultMap">
+    <select id="findRootJcTypes" resultMap="TreeResultMap">
         select
         <include refid="Base_Column_List" />
         from b_jc_type
@@ -115,7 +124,7 @@
     </select>
 
     <!--findChildJcTypes-->
-    <select id="findChildJcTypes" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="findChildJcTypes" resultMap="TreeResultMap" parameterType="java.lang.Long">
         select
         <include refid="Base_Column_List" />
         from b_jc_type
